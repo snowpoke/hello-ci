@@ -11,6 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cargo build --all-targets --out-dir /out --target aarch64-unknown-linux-gnu -Z unstable-options'
+                stash includes: '/out/*', name: 'final_artifacts'
             }
         }
     }
