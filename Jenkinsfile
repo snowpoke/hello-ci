@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cargo build --all-targets --target aarch64-unknown-linux-gnu'
+                sh 'cargo build --all-targets --out-dir /out --target aarch64-unknown-linux-gnu -Z unstable-options'
             }
         }
     }
