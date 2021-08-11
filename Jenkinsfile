@@ -12,8 +12,10 @@ pipeline {
             steps {
                 sh 'cargo build --target aarch64-unknown-linux-gnu --target-dir ./target'
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu --target-dir ./target'
-                sh 'ls ./target/CACHEDIR.TAG'
-                stash includes: './target/CACHEDIR.TAG', name: 'final_artifacts'
+                post {
+                    sh 'ls ./target/CACHEDIR.TAG'
+                    stash includes: './target/CACHEDIR.TAG', name: 'final_artifacts'
+                }
             }
         }
     }
