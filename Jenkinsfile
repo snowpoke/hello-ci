@@ -29,7 +29,9 @@ pipeline {
         }
 
         stage('Build'){
-            sh 'cargo build --target aarch64-unknown-linux-gnu'
+            steps {
+                sh 'cargo build --target aarch64-unknown-linux-gnu'
+            }
         }
     }
 }
