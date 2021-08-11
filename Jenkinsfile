@@ -12,14 +12,7 @@ pipeline {
             steps {
                 sh 'cargo build --target aarch64-unknown-linux-gnu'
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
-            }
-        }
-        stage('Stash') {
-            agent {
-                label 'rust-arm-toolchain'
-            }
-            steps {
-                dir('/out'){
+                dir('/artifacts/target'){
                     stash includes: '**', name: 'artifacts'
                 }
             }
