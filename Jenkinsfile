@@ -12,9 +12,9 @@ pipeline {
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
 
                 // stash always uses relative paths, so we have to cd into the target folder first
-                dir('/artifacts/target/aarch64-unknown-linux-gnu/debug'){
+                dir('/artifacts'){
                     sh 'chmod --recursive 777 .' // ensure that controller has read permission
-                    stash includes: '**', name: 'unit_tests'
+                    stash includes: 'target/aarch64-unknown-linux-gnu/debug/**', name: 'unit_tests'
                 }
             }
         }
