@@ -5,7 +5,7 @@ pipeline {
             agent { 
                 docker {
                     image 'cross-rust-nightly'
-                    args '-u root:root -v /out:/artifacts/target'
+                    args '-u root:root'
                     label 'rust-arm-toolchain'
                 }
             }
