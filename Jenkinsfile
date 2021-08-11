@@ -14,6 +14,8 @@ pipeline {
 
                 // stash always uses relative paths, so we have to cd into the target folder first
                 dir('/artifacts/target'){
+                    sh 'ls .'
+                    sh 'ls aarch64-unknown-linux-gnu/debug'
                     stash includes: 'aarch64-unknown-linux-gnu/debug/**', name: 'unit_tests'
                 }
             }
