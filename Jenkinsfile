@@ -9,15 +9,12 @@ pipeline {
     stages {
         stage('Build unit tests as executable') {
             steps {
-                sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
-                sh 'chmod --recursive 777 /artifacts' // ensure that controller has access rights
+                sh 'cargo test --no-run --target aarch64-unknown-linux-gnu --target-dir ./target'
+                sh 'chmod --recursive 777 ./target' // ensure that controller has access rights
 
-                // stash always uses relative paths, so we have to cd into the target folder first
-                dir('/artifacts/target'){
-                    sh 'ls .'
-                    sh 'ls aarch64-unknown-linux-gnu/debug'
-                    stash includes: 'aarch64-unknown-linux-gnu/debug/**', name: 'unit_tests'
-                }
+                sh 'ls target'
+                sh 'ls target/aarch64-unknown-linux-gnu/debug'
+                stash includes: 'target/aarch64-unknown-linux-gnu/debug/**', name:'unit_tests'
             }
         }
 
