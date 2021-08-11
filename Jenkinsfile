@@ -14,6 +14,7 @@ pipeline {
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
                 sh 'whoami'
                 sh 'ls .'
+                sh 'chmod --recursive 777 .'
                 stash includes: '**', name: 'artifacts'
             }
         }
