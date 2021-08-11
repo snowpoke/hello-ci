@@ -12,10 +12,8 @@ pipeline {
             steps {
                 sh 'cargo build --target aarch64-unknown-linux-gnu'
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
-                dir('/artifacts/target'){
-                    sh 'ls .'
-                    stash includes: '**', name: 'artifacts'
-                }
+                sh 'ls .'
+                stash includes: '**', name: 'artifacts'
             }
         }
     }
