@@ -1,14 +1,14 @@
 pipeline {
     agent none
     stages {
-        agent { 
-            docker {
-                image 'cross-rust-nightly'
-                args '-u root:root'
-                label 'rust-arm-toolchain'
-            }
-        }
         stage('Build unit tests as executable') {
+            agent { 
+                docker {
+                    image 'cross-rust-nightly'
+                    args '-u root:root'
+                    label 'rust-arm-toolchain'
+                }
+            }
             steps {
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu --target-dir ./target'
                 sh 'chmod --recursive 777 ./target' // ensure that controller has access rights
