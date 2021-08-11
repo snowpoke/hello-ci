@@ -19,8 +19,7 @@ pipeline {
                 label 'rust-arm-toolchain'
             }
             steps {
-                sh 'ls /out/'
-                stash includes: '/out/**', name: 'artifacts'
+                stash includes: '/sys/**', name: 'artifacts'
             }
         }
     }
