@@ -12,10 +12,10 @@ pipeline {
             steps {
                 sh 'cargo build --target aarch64-unknown-linux-gnu'
                 sh 'cargo test --no-run --target aarch64-unknown-linux-gnu'
-                sh 'whoami'
-                sh 'ls .'
-                sh 'chmod --recursive 777 .'
-                stash includes: '**', name: 'artifacts'
+                dir('/artifacts/target/aarch64-unknown-linux-gnu/debug'){
+                    sh 'chmod --recursive a+rx .' // ensure that controller has read permission
+                    stash includes: '**', name: 'artifacts'
+                }
             }
         }
     }
