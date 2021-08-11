@@ -9,10 +9,12 @@ pipeline {
 
     stages {
         stage('Analysis') {
+            steps {
             // we read the package name from Cargo.toml to determine the artifact names
                 // requires `toml-cli`
                 sh 'cargo install toml-cli'
                 sh 'export PACKAGE_NAME=$(toml get Cargo.toml package.name | sed -e \'s/^"//\' -e \'s/"$//\')'
+            }
         }
         stage('Build') {
             steps {
